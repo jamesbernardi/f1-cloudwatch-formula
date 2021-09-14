@@ -9,6 +9,12 @@ logs:
     - makedirs: True
     - mode: 2774
 
+awslogs:
+  pkg.purged
+
+/etc/awslogs/awslogs.conf:
+  file.absent
+
 'amazon-linux-extras install collectd':
   cmd.run:
     - unless: 

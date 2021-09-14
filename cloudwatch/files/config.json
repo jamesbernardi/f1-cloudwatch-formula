@@ -28,6 +28,15 @@
 						"log_stream_name": "{instance_id}-{{ pillar.project }}"
 					},
                     {% endfor %}
+					{% if pillar['cloudwatch_logs'] is defined %}
+                    {% for logname, streams in pillar.cloudwatch_logs.streams.items() %}
+                    {
+						"file_path": "{{ path }}",
+						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/{{ name }}",
+						"log_stream_name": "{instance_id}-{{ name }}"
+                    },
+                    {% endfor %}
+                    {% endif %}
                     {
 						"file_path": "/var/log/messages",
 						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/messages",
@@ -63,15 +72,6 @@
 						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/audit",
 						"log_stream_name": "{instance_id}-AUDIT"
                     },
-                    {% if pillar['awslogs'] is defined %}
-                    {% for logname, streams in pillar.awslogs.streams.items() %}
-                    {
-						"file_path": "{{ path }}",
-						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/{{ name }}",
-						"log_stream_name": "{instance_id}-{{ name }}"
-                    },
-                    {% endfor %}
-                    {% endif %}
                     {
 						"file_path": "/var/log/salt/lastlog",
 						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/lastlog",
