@@ -20,7 +20,7 @@
                     {
 						"file_path": "/var/log/php-fpm/{{ phpfpm }}",
 						"log_group_name": "/forumone/{{ pillar.project }}/{{ grains.loggroup[0] }}/php-fpm/",
-						"log_stream_name": "{instance_id}-{{ php-fpm }}"
+						"log_stream_name": "{instance_id}-{{ phpfpm }}"
 					}
                     {% endfor %}
                     {% for project_logs in salt['file.find']('/var/log/' + project, type='f', name='*log', print='name' ) %}
