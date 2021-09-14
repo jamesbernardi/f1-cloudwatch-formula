@@ -9,10 +9,17 @@ logs:
     - makedirs: True
     - mode: 2774
 
+'amazon-linux-extras install collectd':
+  cmd.run:
+    - unless: 
+      - /bin/amazon-linux-extras list | grep collectd | grep -c enabled
+
 install_cloudwatch_agent:
   pkg.installed:
     - pkgs:
       - amazon-cloudwatch-agent
+      - collectd
+
 
 /opt/aws/amazon-cloudwatch-agent/bin/forumone.json:
   file.managed:
