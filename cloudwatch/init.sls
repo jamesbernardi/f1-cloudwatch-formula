@@ -24,6 +24,8 @@ install_cloudwatch_agent:
     - require:
       - pkg: install_cloudwatch_agent
 
-#configure_cloudwatch_agent:
-#  cmd.run:
-#    - 
+configure_cloudwatch_agent:
+  cmd.run:
+    - /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/forumone.json
+    - watch:
+      - /opt/aws/amazon-cloudwatch-agent/bin/forumone.json
