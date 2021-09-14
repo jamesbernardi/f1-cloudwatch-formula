@@ -14,7 +14,7 @@ install_cloudwatch_agent:
     - pkgs:
       - amazon-cloudwatch-agent
 
- /opt/aws/amazon-cloudwatch-agent/bin/forumone.json:
+/opt/aws/amazon-cloudwatch-agent/bin/forumone.json:
   file.managed:
     - source: salt://cloudwatch/files/config.json
     - user: root
